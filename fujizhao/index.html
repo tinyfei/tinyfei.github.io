@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="腹肌照分享与健身展示平台，收录健身达人、模特及运动爱好者的腹肌展示作品。提供腹肌训练方法、核心力量解析及健康体态建议。">
+    <meta name="keywords" content="腹肌照, 健身展示, 腹肌训练, 核心力量, 健美模特">
+    <title>腹肌照-健身达人风采与核心力量展示平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #2c3e50;
+            --accent-color: #f1c40f;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #f9f9f9;
+            --white: #ffffff;
+            --spacing-unit: 16px;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .search-box {
+            display: flex;
+            background: #f0f0f0;
+            border-radius: 20px;
+            padding: 4px 12px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 4px;
+            width: 150px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px var(--spacing-unit);
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 40px;
+        }
+
+        /* Gallery Grid */
+        .section-header {
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 12px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            padding-top: 125%; /* 4:5 Aspect Ratio */
+            overflow: hidden;
+            background-color: #eee;
+        }
+
+        .card-image-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.6);
+            color: var(--white);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .card-content {
+            padding: 16px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .card-meta {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Sidebar */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sidebar-widget {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .widget-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .category-list li {
+            margin-bottom: 12px;
+        }
+
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .category-list a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .category-count {
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* Training Guide Section */
+        .training-section {
+            background-color: var(--white);
+            padding: 60px 20px;
+            margin-top: 40px;
+        }
+
+        .training-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .training-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .training-text p {
+            margin-bottom: 16px;
+            color: var(--text-light);
+        }
+
+        .training-steps {
+            margin-top: 24px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .step-text p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background-color: #f4f6f8;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        details {
+            background: var(--white);
+            margin-bottom: 16px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 20px 20px;
+            color: var(--text-light);
+            border-top: 1px solid #eee;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: #bdc3c7;
+            padding: 60px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                height: auto;
+                padding: 16px;
+            }
+
+            nav ul {
+                margin-top: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .training-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>⚡</span> 腹肌照
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">最新收录</a></li>
+                    <li><a href="#">分类浏览</a></li>
+                    <li><a href="#">训练指南</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索作品...">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>展示你的核心力量</h1>
+            <p>汇聚全球健身达人、模特与运动爱好者的专业腹肌展示。发现更多关于体态管理、核心训练与健康生活方式的灵感。</p>
+            <a href="#" class="cta-btn">浏览作品集</a>
+        </section>
+
+        <div class="container">
+            <!-- Gallery Section -->
+            <section class="gallery-section">
+                <div class="section-header">
+                    <h2 class="section-title">精选腹肌照展示</h2>
+                    <a href="#" style="color: var(--primary-color); font-weight: 500;">查看全部 &rarr;</a>
+                </div>
+                
+                <div class="gallery-grid">
+                    <!-- Card 1 -->
+                    <article class="card">
+                        <div class="card-image-wrapper">
+                            <span class="card-badge">健美模特</span>
+                            <img src="https://picsum.photos/seed/abs1/400/500" alt="男性健美模特腹肌展示">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">黄金分割线：专业健美运动员展示</h3>
+                            <div class="card-meta">
+                                <span>2023-10-24</span>
+                                <span>👁 1.2k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="card">
+                        <div class="card-image-wrapper">
+                            <span class="card-badge">健身达人</span>
+                            <img src="https://picsum.photos/seed/abs2/400/500" alt="户外运动腹肌">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">户外晨跑：汗水铸就的腹肌线条</h3>
+                            <div class="card-meta">
+                                <span>2023-10-23</span>
+                                <span>👁 856</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="card">
+                        <div class="card-image-wrapper">
+                            <span class="card-badge">瑜伽/普拉提</span>
+                            <img src="https://picsum.photos/seed/abs3/400/500" alt="柔韧性与核心">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">普拉提：不仅仅是柔韧性，更是核心</h3>
+                            <div class="card-meta">
+                                <span>2023-10-22</span>
+                                <span>👁 2.1k</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article class="card">
+                        <div class="card-image-wrapper">
+                            <span class="card-badge">马甲线</span>
+                            <img src="https://picsum.photos/seed/abs4/400/500" alt="女性马甲线展示">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">夏日马甲线：女性健身成果展示</h3>
+                            <div class="card-meta">
+                                <span>2023-10-21</span>
+                                <span>👁 3.5k</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" class="cta-btn" style="background-color: var(--white); color: var(--text-dark);">加载更多作品</a>
+                </div>
+            </section>
+
+            <!-- Sidebar -->
+            <aside>
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">热门分类</h3>
+                    <ul class="category-list">
+                        <li><a href="#"><span>男性腹肌</span> <span class="category-count">124</span></a></li>
+                        <li><a href="#"><span>女性马甲线</span> <span class="category-count">89</span></a></li>
+                        <li><a href="#"><span>健美比赛</span> <span class="category-count">45</span></a></li>
+                        <li><a href="#"><span>运动装备</span> <span class="category-count">32</span></a></li>
+                        <li><a href="#"><span>健康饮食</span> <span class="category-count">67</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">近期榜单</h3>
+                    <ul class="category-list">
+                        <li><a href="#">🏆 2023年度最佳腹肌奖</a></li>
+                        <li><a href="#">🔥 最具力量感作品</a></li>
+                        <li><a href="#">✨ 最佳造型奖</a></li>
+                        <li><a href="#">🥇 热门打卡榜</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Training Guide Section -->
+        <section class="training-section">
+            <div class="training-content">
+                <div class="training-text">
+                    <h2>如何练出清晰腹肌？</h2>
+                    <p>腹肌照不仅仅是视觉的展示，更是长期自律和科学训练的证明。想要拥有令人羡慕的腹肌线条，需要结合有氧运动、饮食控制和核心力量训练。</p>
+                    
+                    <div class="training-steps">
+                        <div class="step-item">
+                            <div class="step-num">1</div>
+                            <div class="step-text">
+                                <h4>体脂率控制</h4>
+                                <p>腹肌是肌肉，只有当体脂率降低到一定程度（男性通常需低于15%，女性低于20%），腹肌的轮廓才会显现。</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">2</div>
+                            <div class="step-text">
+                                <h4>核心力量训练</h4>
+                                <p>通过卷腹、平板支撑、俄罗斯转体等动作增强腹直肌、腹斜肌和腹横肌的力量与耐力。</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">3</div>
+                            <div class="step-text">
+                                <h4>科学饮食</h4>
+                                <p>制造热量缺口，减少精制糖和油脂摄入，增加蛋白质比例，为肌肉修复和脂肪燃烧提供能量。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="training-image">
+                    <img src="https://picsum.photos/seed/gym/600/400" alt="健身房核心训练场景" style="width: 100%; border-radius: var(--border-radius); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="faq-container">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">常见问题解答</h2>
+                
+                <details>
+                    <summary>所有人都适合做腹肌训练吗？</summary>
+                    <div class="faq-content">
+                        大多数健康人都可以进行核心训练。但在开始任何新的锻炼计划之前，特别是有背部疾病或腰部问题的人群，建议咨询医生或专业教练。
+                    </div>
+                </details>
+
+                <details>
+                    <summary>一天做多少个卷腹能练出腹肌？</summary>
+                    <div class="faq-content">
+                        质量比数量更重要。建议每次训练进行3-4组，每组15-20次，注意动作标准，避免借力。
+                    </div>
+                </details>
+
+                <details>
+                    <summary>腹肌照拍摄有什么注意事项？</summary>
+                    <div class="faq-content">
+                        在拍摄腹肌照时，保持良好的体态（骨盆前倾或后倾会影响视觉效果），适当使用灯光增强肌肉立体感，并确保背景干净整洁。
+                    </div>
+                </details>
+
+                <details>
+                    <summary>为什么我练了腹肌却看不到？</summary>
+                    <div class="faq-content">
+                        这通常是因为体脂率过高。即使腹肌很发达，也会被皮下脂肪覆盖。因此，减脂是显露腹肌的关键步骤。
+                    </div>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>关于腹肌照</h3>
+                <p>我们致力于分享健身成果、展示核心力量之美，为运动爱好者提供交流与展示的平台。</p>
+            </div>
+            <div class="footer-col">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="#">作品投稿</a></li>
+                    <li><a href="#">用户协议</a></li>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">联系站长</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>热门标签</h3>
+                <ul>
+                    <li><a href="#">腹肌撕裂者</a></li>
+                    <li><a href="#">马甲线养成</a></li>
+                    <li><a href="#">腹肌训练</a></li>
+                    <li><a href="#">健身打卡</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 腹肌照展示平台. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+  </html>
