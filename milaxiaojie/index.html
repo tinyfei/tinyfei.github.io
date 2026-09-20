@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>米拉小姐 - 唯美插画与数字艺术创作平台</title>
+    <meta name="description" content="米拉小姐是一个专注于插画、概念设计及数字艺术创作的在线社区。在这里，探索治愈系画风、沉浸式阅读体验以及艺术家分享的创作灵感。">
+    <meta name="keywords" content="米拉小姐,插画,数字艺术,治愈系,同人创作,在线阅读">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #6a89cc;
+            --secondary-color: #82ccdd;
+            --accent-color: #ff7675;
+            --bg-color: #f7f9fc;
+            --card-bg: #ffffff;
+            --text-main: #2f3542;
+            --text-light: #747d8c;
+            --spacing-unit: 1rem;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 4px rgba(106, 137, 204, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #5473d0;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #2d3436;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #636e72;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: #2d3436;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10%;
+            height: 80%;
+            width: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Card Design */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f1f2f6;
+            padding-top: 1rem;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .author-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #dfe4ea;
+        }
+
+        .like-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .like-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Feature Section */
+        .feature-section {
+            background-color: #ffffff;
+            padding: 4rem 1.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .feature-item svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            fill: var(--primary-color);
+        }
+
+        .feature-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Category Pills */
+        .category-scroll {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            scrollbar-width: thin;
+        }
+
+        .category-pill {
+            padding: 0.6rem 1.5rem;
+            background-color: white;
+            border: 1px solid #dfe4ea;
+            border-radius: 25px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .category-pill:hover, .category-pill.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2d3436;
+            color: #dfe6e9;
+            padding: 4rem 1.5rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #b2bec3;
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #636e72;
+            color: #636e72;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                display: none; /* Simplified for mobile */
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#6a89cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="#6a89cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="#6a89cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>米拉小姐</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">连载作品</a></li>
+                    <li><a href="#">画廊展示</a></li>
+                    <li><a href="#">创作者中心</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-outline">登录</button>
+                <button class="btn btn-primary">注册</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>探索米拉小姐的奇幻世界</h1>
+                <p>汇聚全球优秀插画师与创作者，在这里发现治愈人心的故事与独一无二的视觉艺术。</p>
+                <div class="hero-tags">
+                    <span class="tag">#治愈系</span>
+                    <span class="tag">#二次元</span>
+                    <span class="tag">#概念设计</span>
+                    <span class="tag">#同人创作</span>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <button class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1rem;">开始阅读</button>
+                    <button class="btn btn-outline" style="padding: 0.8rem 2rem; font-size: 1rem; border-color: white; color: white;">投稿作品</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <div class="container">
+            <div class="category-scroll">
+                <button class="category-pill active">全部</button>
+                <button class="category-pill">奇幻冒险</button>
+                <button class="category-pill">校园生活</button>
+                <button class="category-pill">赛博朋克</button>
+                <button class="category-pill">古风</button>
+                <button class="category-pill">治愈日常</button>
+                <button class="category-pill">悬疑推理</button>
+            </div>
+        </div>
+
+        <!-- Featured Works Section -->
+        <section class="container">
+            <div class="section-header">
+                <h2 class="section-title">精选连载</h2>
+                <a href="#" class="view-all">查看更多 &rarr;</a>
+            </div>
+            <div class="grid">
+                <!-- Card 1 -->
+                <article class="card">
+                    <img src="https://picsum.photos/seed/mira1/400/250" alt="封面图" class="card-image">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>奇幻冒险</span>
+                            <span>更新至 128 话</span>
+                        </div>
+                        <h3 class="card-title">星穹下的守望者</h3>
+                        <p class="card-desc">在遥远的星穹彼岸，少年与少女共同守护着世界的平衡。一段关于勇气、友谊与成长的旅程。</p>
+                        <div class="card-footer">
+                            <div class="author-info">
+                                <div class="author-avatar"></div>
+                                <span>作者：星空绘者</span>
+                            </div>
+                            <button class="like-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                1.2k
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="card">
+                    <img src="https://picsum.photos/seed/mira2/400/250" alt="封面图" class="card-image">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>校园生活</span>
+                            <span>连载中</span>
+                        </div>
+                        <h3 class="card-title">转角遇到猫又君</h3>
+                        <p class="card-desc">转学第一天就误入神秘社团？高冷学长与迷糊学妹的爆笑日常，温馨又治愈。</p>
+                        <div class="card-footer">
+                            <div class="author-info">
+                                <div class="author-avatar"></div>
+                                <span>作者：橘猫大大</span>
+                            </div>
+                            <button class="like-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                856
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="card">
+                    <img src="https://picsum.photos/seed/mira3/400/250" alt="封面图" class="card-image">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>赛博朋克</span>
+                            <span>完结</span>
+                        </div>
+                        <h3 class="card-title">霓虹雨夜行</h3>
+                        <p class="card-desc">在2077年的新东京，黑客少女为了寻找失踪的哥哥，踏入了充满危险与机遇的地下世界。</p>
+                        <div class="card-footer">
+                            <div class="author-info">
+                                <div class="author-avatar"></div>
+                                <span>作者：NeonGhost</span>
+                            </div>
+                            <button class="like-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                2.4k
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="card">
+                    <img src="https://picsum.photos/seed/mira4/400/250" alt="封面图" class="card-image">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>古风</span>
+                            <span>连载中</span>
+                        </div>
+                        <h3 class="card-title">锦瑟华年</h3>
+                        <p class="card-desc">宫廷权谋与儿女情长交织。她从微末崛起，步步为营，最终能否守住心中的那抹朱砂。</p>
+                        <div class="card-footer">
+                            <div class="author-info">
+                                <div class="author-avatar"></div>
+                                <span>作者：墨染流年</span>
+                            </div>
+                            <button class="like-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                3.1k
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Features / Why Us -->
+        <section class="feature-section">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        <h3>治愈系画风</h3>
+                        <p>精选高质量插画与故事，为您带来极致的视觉享受与情感共鸣。</p>
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                        </svg>
+                        <h3>创作者社区</h3>
+                        <p>这里是插画师与创作者的聚集地，提供展示才华与交流互动的平台。</p>
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                        </svg>
+                        <h3>安全阅读</h3>
+                        <p>严格的审核机制，保障内容的健康与原创，为您提供纯净的阅读环境。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended / New Arrivals -->
+        <section class="container">
+            <div class="section-header">
+                <h2 class="section-title">最新上架</h2>
+                <a href="#" class="view-all">查看更多 &rarr;</a>
+            </div>
+            <div class="grid">
+                <article class="card">
+                    <img src="https://picsum.photos/seed/mira5/400/250" alt="封面图" class="card-image">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>悬疑推理</span>
+                            <span>今日更新</span>
+                        </div>
+                        <h3 class="card-title">无声的证词</h3>
+                        <p class="card-desc">密室杀人案背后的真相，往往隐藏在最不起眼的细节之中。</p>
+                        <div class="card-footer">
+                            <div class="author-info">
+                                <div class="author-avatar"></div>
+                                <span>作者：侦探笔记</span>
+                            </div>
+                            <button class="like-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                432
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="https://picsum.photos/seed/mira6/400/250" alt="封面图" class="card-image">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>治愈日常</span>
+                            <span>连载中</span>
+                        </div>
+                        <h3 class="card-title">猫咪咖啡馆</h3>
+                        <p class="card-desc">经营一家只属于猫的咖啡馆，记录每一只猫咪的可爱瞬间。</p>
+                        <div class="card-footer">
+                            <div class="author-info">
+                                <div class="author-avatar"></div>
+                                <span>作者：喵星人</span>
+                            </div>
+                            <button class="like-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                920
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="https://picsum.photos/seed/mira7/400/250" alt="封面图" class="card-image">
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span>科幻</span>
+                            <span>连载中</span>
+                        </div>
+                        <h3 class="card-title">时间旅行者的日记</h3>
+                        <p class="card-desc">一次意外穿越，主角不得不改变过去以拯救未来，却引发了蝴蝶效应。</p>
+                        <div class="card-footer">
+                            <div class="author-info">
+                                <div class="author-avatar"></div>
+                                <span>作者：时空旅人</span>
+                            </div>
+                            <button class="like-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                1.5k
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 1rem;">
+                    <span style="color: white;">米拉小姐</span>
+                </div>
+                <p style="color: #b2bec3; font-size: 0.9rem; line-height: 1.8;">
+                    致力于打造最优质的二次元插画与漫画阅读社区。让每一个灵感都能被看见，让每一份热爱都有归属。
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>探索</h4>
+                <ul>
+                    <li><a href="#">最新更新</a></li>
+                    <li><a href="#">热门榜单</a></li>
+                    <li><a href="#">分类浏览</a></li>
+                    <li><a href="#">标签云</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>创作者</h4>
+                <ul>
+                    <li><a href="#">投稿指南</a></li>
+                    <li><a href="#">版权声明</a></li>
+                    <li><a href="#">收益分成</a></li>
+                    <li><a href="#">创作工具</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关于</h4>
+                <ul>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">加入我们</a></li>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">服务条款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 米拉小姐. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+  </html>
