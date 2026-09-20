@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="不知火舞小游戏 - 热门格斗小游戏在线玩，还原经典街机操作手感，包含忍术释放、飞踢连招与BOSS挑战，无需下载即可体验格斗乐趣。">
+    <meta name="keywords" content="不知火舞小游戏,格斗游戏,街机小游戏,在线小游戏">
+    <title>不知火舞小游戏-经典格斗在线体验与连招攻略</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #2f3542;
+            --accent-color: #ffa502;
+            --bg-color: #f1f2f6;
+            --card-bg: #ffffff;
+            --text-main: #2f3542;
+            --text-light: #747d8c;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 顶部导航 */
+        header {
+            background: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .search-btn {
+            background: var(--bg-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            color: var(--text-light);
+        }
+
+        /* Hero 区域 */
+        .hero {
+            background: linear-gradient(135deg, #2f3542 0%, #1e272e 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,71,87,0.2) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .game-play-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .game-play-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 71, 87, 0.5);
+        }
+
+        /* 游戏区域容器 */
+        .game-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .game-wrapper {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            position: relative;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .game-status {
+            font-size: 14px;
+            color: var(--text-light);
+            display: flex;
+            gap: 20px;
+        }
+
+        .game-canvas-container {
+            width: 100%;
+            background: #000;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            background: #333;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .controls-hint {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .key {
+            display: inline-block;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border-bottom: 2px solid #ccc;
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        /* 内容布局 */
+        .main-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            flex: 1;
+        }
+
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* 卡片样式 */
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            color: var(--secondary-color);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .game-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .card-img-placeholder {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(45deg, #ff9ff3, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .card-info {
+            padding: 15px;
+        }
+
+        .card-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* 规则列表 */
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .rules-list li::before {
+            content: '★';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* 标签 */
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 5px;
+            background: #eee;
+            color: var(--text-light);
+        }
+
+        .tag.hot { background: #ffeaa7; color: #e17055; }
+        .tag.new { background: #81ecec; color: #00cec9; }
+
+        /* 页脚 */
+        footer {
+            background: var(--secondary-color);
+            color: #dfe4ea;
+            padding: 40px 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #b2bec3;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #636e72;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 15px; }
+            nav ul { display: none; } /* 移动端简化导航 */
+            .hero h1 { font-size: 2rem; }
+            .main-layout { grid-template-columns: 1fr; }
+            .game-canvas-container { aspect-ratio: 4/3; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <div class="logo">不知火舞<span>小游戏</span></div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">首页</a></li>
+                <li><a href="#games">游戏中心</a></li>
+                <li><a href="#guide">操作指南</a></li>
+                <li><a href="#about">关于我们</a></li>
+            </ul>
+        </nav>
+        <button class="search-btn">搜索游戏</button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>经典格斗 · 不知火舞</h1>
+        <p>无需下载，即点即玩。重温街机时代的激情，体验忍术连招与华丽飞踢。</p>
+        <a href="#game-container" class="game-play-btn">立即开始战斗</a>
+    </div>
+</section>
+
+<main>
+    <!-- 游戏主要区域 -->
+    <section id="game-container" class="game-section">
+        <div class="game-wrapper">
+            <div class="game-header">
+                <div class="game-title">不知火舞：忍道决斗</div>
+                <div class="game-status">
+                    <span>生命值: <span id="hp-player">100%</span></span>
+                    <span>对手: <span id="hp-enemy">100%</span></span>
+                </div>
+            </div>
+            <div class="game-canvas-container">
+                <canvas id="gameCanvas" width="800" height="450"></canvas>
+            </div>
+            <div class="controls-hint">
+                <span><span class="key">←</span> <span class="key">→</span> 移动</span>
+                <span><span class="key">A</span> 攻击</span>
+                <span><span class="key">S</span> 防御</span>
+                <span><span class="key">W</span> 跳跃</span>
+                <span><span class="key">D</span> 忍术</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-layout">
+        <!-- 左侧内容 -->
+        <div class="content-column">
+            <section id="games">
+                <h2 class="section-title">热门不知火舞小游戏</h2>
+                <div class="card-grid">
+                    <div class="game-card" onclick="loadGame('dancer')">
+                        <div class="card-img-placeholder">🌸</div>
+                        <div class="card-info">
+                            <h3>街机格斗版</h3>
+                            <p>还原经典判定帧，体验原汁原味的格斗快感。</p>
+                            <span class="tag hot">热门</span>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="loadGame('skill')">
+                        <div class="card-img-placeholder">🔥</div>
+                        <div class="card-info">
+                            <h3>忍术特训版</h3>
+                            <p>专注于技能释放练习，掌握必杀技连招。</p>
+                            <span class="tag new">新游</span>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="loadGame('boss')">
+                        <div class="card-img-placeholder">🐉</div>
+                        <div class="card-info">
+                            <h3>BOSS挑战赛</h3>
+                            <p>面对强大的BOSS，考验你的走位与反应。</p>
+                            <span class="tag hot">挑战</span>
+                        </div>
+                    </div>
+                    <div class="game-card" onclick="loadGame('mini')">
+                        <div class="card-img-placeholder">🏃</div>
+                        <div class="card-info">
+                            <h3>极速跑酷版</h3>
+                            <p>侧滑视角，躲避障碍物，收集金币。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="guide">
+                <h2 class="section-title">游戏玩法与技巧</h2>
+                <div class="card">
+                    <ul class="rules-list">
+                        <li><strong>基础移动：</strong> 使用方向键控制角色左右移动，空格键跳跃。</li>
+                        <li><strong>攻击连招：</strong> 跳跃中按下攻击键（A）可发动下段踢击，落地瞬间接普攻可造成浮空效果。</li>
+                        <li><strong>防御机制：</strong> 按下防御键（S）可减少受到的伤害，但会被击退，注意时机。</li>
+                        <li><strong>必杀技释放：</strong> 积蓄能量槽（屏幕上方红色条）满后，按下忍术键（D）释放“超必杀忍蜂”，这是扭转战局的关键。</li>
+                        <li><strong>获胜条件：</strong> 将对手生命值归零或规定时间内得分更高者获胜。</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- 右侧侧边栏 -->
+        <aside class="sidebar">
+            <div class="card">
+                <h3 style="margin-bottom: 15px;">快速导航</h3>
+                <ul style="list-style: none; line-height: 2;">
+                    <li><a href="#game-container">回到游戏</a></li>
+                    <li><a href="#games">换一款</a></li>
+                    <li><a href="#guide">新手教程</a></li>
+                    <li><a href="#">排行榜</a></li>
+                </ul>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, #ff9ff3, #feca57);">
+                <h3 style="color: #333; margin-bottom: 10px;">每日福利</h3>
+                <p style="color: #555; font-size: 0.9rem; margin-bottom: 15px;">注册账号即可获得专属皮肤体验卡。</p>
+                <button style="width: 100%; padding: 10px; background: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">领取奖励</button>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>不知火舞小游戏</h4>
+            <p style="color: #b2bec3; font-size: 0.9rem;">专注于提供高品质的2D格斗小游戏体验，致敬经典，快乐至上。</p>
+        </div>
+        <div class="footer-col">
+            <h4>游戏分类</h4>
+            <ul>
+                <li><a href="#">格斗对战</a></li>
+                <li><a href="#">动作闯关</a></li>
+                <li><a href="#">休闲益智</a></li>
+                <li><a href="#">模拟经营</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>帮助中心</h4>
+            <ul>
+                <li><a href="#">常见问题</a></li>
+                <li><a href="#">联系客服</a></li>
+                <li><a href="#">隐私政策</a></li>
+                <li><a href="#">用户协议</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2023 不知火舞小游戏平台. All Rights Reserved. 本站仅供学习交流使用.
+    </div>
+</footer>
+
+<script>
+    // 游戏核心逻辑 (模拟版)
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // 游戏状态
+    let gameRunning = true;
+    let animationId;
+    
+    // 玩家对象
+    const player = {
+        x: 100,
+        y: 300,
+        width: 50,
+        height: 80,
+        velocityX: 0,
+        velocityY: 0,
+        speed: 5,
+        jumpPower: -15,
+        color: '#ff4757',
+        hp: 100,
+        isAttacking: false,
+        isBlocking: false,
+        facingRight: true,
+        attackTimer: 0,
+        cooldown: 0,
+        maxCooldown: 30
+    };
+
+    // 敌人对象
+    const enemy = {
+        x: 600,
+        y: 300,
+        width: 50,
+        height: 80,
+        velocityX: 0,
+        velocityY: 0,
+        speed: 3,
+        hp: 100,
+        color: '#2f3542',
+        isAttacking: false,
+        facingRight: false
+    };
+
+    // 键盘输入
+    const keys = {
+        left: false,
+        right: false,
+        up: false,
+        attack: false,
+        block: false,
+        special: false
+    };
+
+    // 监听键盘
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = true;
+        if (e.key === 'ArrowRight' || e.key === 'd') keys.right = true;
+        if (e.key === 'ArrowUp' || e.key === 'w') keys.up = true;
+        if (e.key === 'a' || e.key === 'A') keys.attack = true;
+        if (e.key === 's' || e.key === 'S') keys.block = true;
+        if (e.key === 'd' || e.key === 'D') keys.special = true;
+    });
+
+    window.addEventListener('keyup', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = false;
+        if (e.key === 'ArrowRight' || e.key === 'd') keys.right = false;
+        if (e.key === 'ArrowUp' || e.key === 'w') keys.up = false;
+        if (e.key === 'a' || e.key === 'A') keys.attack = false;
+        if (e.key === 's' || e.key === 'S') keys.block = false;
+        if (e.key === 'd' || e.key === 'D') keys.special = false;
+    });
+
+    // 重置游戏
+    function resetGame() {
+        player.x = 100;
+        player.y = 300;
+        player.hp = 100;
+        player.velocityX = 0;
+        player.velocityY = 0;
+        
+        enemy.x = 600;
+        enemy.y = 300;
+        enemy.hp = 100;
+        enemy.velocityX = 0;
+        enemy.velocityY = 0;
+        
+        updateHP();
+    }
+
+    // 更新血量显示
+    function updateHP() {
+        document.getElementById('hp-player').innerText = Math.max(0, player.hp) + '%';
+        document.getElementById('hp-enemy').innerText = Math.max(0, enemy.hp) + '%';
+    }
+
+    // 绘制矩形
+    function drawRect(x, y, w, h, color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, w, h);
+    }
+
+    // 绘制文字
+    function drawText(text, x, y, color = 'white', size = 20) {
+        ctx.fillStyle = color;
+        ctx.font = `bold ${size}px Arial`;
+        ctx.fillText(text, x, y);
+    }
+
+    // 碰撞检测
+    function checkCollision(rect1, rect2) {
+        return (
+            rect1.x < rect2.x + rect2.width &&
+            rect1.x + rect1.width > rect2.x &&
+            rect1.y < rect2.y + rect2.height &&
+            rect1.height + rect1.y > rect2.y
+        );
+    }
+
+    // 游戏循环
+    function update() {
+        if (!gameRunning) return;
+
+        // 玩家逻辑
+        if (keys.left) {
+            player.velocityX = -player.speed;
+            player.facingRight = false;
+        } else if (keys.right) {
+            player.velocityX = player.speed;
+            player.facingRight = true;
+        } else {
+            player.velocityX = 0;
+        }
+
+        if (keys.up && player.y >= 300) {
+            player.velocityY = player.jumpPower;
+        }
+
+        player.velocityY += 0.8; // 重力
+        player.x += player.velocityX;
+        player.y += player.velocityY;
+
+        // 地面检测
+        if (player.y > 300) {
+            player.y = 300;
+            player.velocityY = 0;
+        }
+
+        // 边界检测
+        if (player.x < 0) player.x = 0;
+        if (player.x > canvas.width - player.width) player.x = canvas.width - player.width;
+
+        // 敌人 AI (简单移动)
+        if (enemy.x < player.x - 50) {
+            enemy.velocityX = enemy.speed;
+            enemy.facingRight = true;
+        } else if (enemy.x > player.x + 50) {
+            enemy.velocityX = -enemy.speed;
+            enemy.facingRight = false;
+        } else {
+            enemy.velocityX = 0;
+        }
+
+        enemy.velocityY += 0.8;
+        enemy.x += enemy.velocityX;
+        enemy.y += enemy.velocityY;
+
+        if (enemy.y > 300) {
+            enemy.y = 300;
+            enemy.velocityY = 0;
+        }
+
+        if (enemy.x < 0) enemy.x = 0;
+        if (enemy.x > canvas.width - enemy.width) enemy.x = canvas.width - enemy.width;
+
+        // 攻击逻辑
+        if (keys.attack && player.cooldown <= 0) {
+            player.isAttacking = true;
+            player.attackTimer = 10;
+            player.cooldown = player.maxCooldown;
+            
+            // 简单攻击判定
+            let attackRange = player.facingRight ? player.width : -player.width;
+            let attackBox = {
+                x: player.facingRight ? player.x + player.width : player.x - 50,
+                y: player.y,
+                width: 50,
+                height: player.height
+            };
+
+            if (checkCollision(attackBox, enemy)) {
+                if (keys.block) {
+                    enemy.hp -= 5; // 防御时伤害减半
+                } else {
+                    enemy.hp -= 15; // 普通攻击
+                }
+                updateHP();
+                if (enemy.hp <= 0) {
+                    gameRunning = false;
+                    drawText("你赢了!", canvas.width/2 - 50, canvas.height/2, "#2ed573", 50);
+                }
+            }
+        }
+
+        if (player.attackTimer > 0) player.attackTimer--;
+        else player.isAttacking = false;
+
+        if (player.cooldown > 0) player.cooldown--;
+    }
+
+    function draw() {
+        // 清空画布
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 绘制背景 (简单的舞台)
+        drawRect(0, 300, canvas.width, 150, '#222'); // 地板
+        drawRect(0, 0, canvas.width, 300, '#1e272e'); // 背景墙
+
+        // 绘制玩家 (带简单的动画效果)
+        if (player.isAttacking) {
+            // 攻击动画：身体变色
+            ctx.fillStyle = '#fff';
+            let attackX = player.facingRight ? player.x + player.width : player.x - 60;
+            ctx.fillRect(attackX, player.y, 60, player.height);
+        }
+        
+        drawRect(player.x, player.y, player.width, player.height, player.color);
+        // 眼睛
+        drawText('●', player.facingRight ? player.x + 35 : player.x + 5, player.y + 20, 'white', 10);
+
+        // 绘制敌人
+        drawRect(enemy.x, enemy.y, enemy.width, enemy.height, enemy.color);
+        drawText('●', enemy.facingRight ? enemy.x + 35 : enemy.x + 5, enemy.y + 20, 'white', 10);
+
+        // 绘制UI
+        if (gameRunning) {
+            drawText(`HP: ${player.hp}`, 10, 30, '#ff4757', 24);
+            drawText(`HP: ${enemy.hp}`, canvas.width - 100, 30, '#ff4757', 24);
+        }
+    }
+
+    function loop() {
+        update();
+        draw();
+        animationId = requestAnimationFrame(loop);
+    }
+
+    // 启动游戏
+    resetGame();
+    loop();
+
+    // 模拟切换游戏
+    function loadGame(type) {
+        alert(`正在加载: ${type} 版本...`);
+    }
+</script>
+
+</body>
+</html>
