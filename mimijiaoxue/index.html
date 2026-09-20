@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="秘密教学是一个专注于教育方法与心理引导的专业平台，提供青少年成长、沟通技巧及学术辅导的深度指南。">
+    <meta name="keywords" content="秘密教学, 教育方法, 心理引导, 青少年成长, 沟通技巧">
+    <title>秘密教学-青少年成长与高效学习指导平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #50E3C2;
+            --accent-color: #FF6B6B;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 布局容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部导航 */
+        header {
+            background-color: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--text-dark);
+            margin-left: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-gray);
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .btn-subscribe {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .btn-subscribe:hover {
+            background-color: #357ABD;
+            transform: translateY(-2px);
+        }
+
+        /* Hero 区域 */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, #E0F7FA 0%, #E1F5FE 100%);
+            padding: 80px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(74, 144, 226, 0.1);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        .btn-hero {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+            transition: var(--transition);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.5);
+        }
+
+        /* 特色板块 */
+        .features {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-gray);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--secondary-color);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        /* 核心课程 */
+        .courses {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .course-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .course-img {
+            height: 180px;
+            background-color: #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .course-img img {
+            transform: scale(1.05);
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .course-desc {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 6px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* 知识库/文章列表 */
+        .resources {
+            padding: 60px 0;
+        }
+
+        .resource-list {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .article-item {
+            display: flex;
+            background: var(--bg-white);
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .article-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .article-thumb {
+            width: 120px;
+            height: 90px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .article-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .article-category {
+            font-size: 12px;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .article-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .article-meta {
+            font-size: 12px;
+            color: #999;
+            margin-top: auto;
+        }
+
+        /* 侧边栏 */
+        .sidebar-widget {
+            background: var(--bg-white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .faq-list li {
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 15px;
+        }
+
+        .faq-list li:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .faq-answer {
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #2C3E50;
+            color: #ecf0f1;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bdc3c7;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+            color: #95a5a6;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                margin: 15px 0;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .resource-list {
+                grid-template-columns: 1fr;
+            }
+
+            .article-item {
+                flex-direction: column;
+            }
+
+            .article-thumb {
+                width: 100%;
+                height: 180px;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">秘密教学<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#courses">精选课程</a></li>
+                    <li><a href="#resources">深度阅读</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                </ul>
+            </nav>
+            <a href="#join" class="btn-subscribe">立即加入</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-tags">
+                    <span class="tag">高效学习</span>
+                    <span class="tag">心理引导</span>
+                    <span class="tag">沟通技巧</span>
+                </div>
+                <h1>探索教育的底层逻辑<br>掌握成长的秘密钥匙</h1>
+                <p>我们提供基于认知科学与心理学的专业指导，帮助您解决学习障碍、提升沟通效率，实现自我突破与深层成长。</p>
+                <a href="#courses" class="btn-hero">开始探索</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>为什么选择秘密教学</h2>
+                    <p>打破传统教育桎梏，发现适合您的独特成长路径</p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>认知重塑</h3>
+                        <p>通过科学的方法论，帮助学员识别并改变固有的思维模式，建立积极的学习心态。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>深度沟通</h3>
+                        <p>掌握非暴力沟通技巧，在人际交往与家庭教育中建立高效的连接与信任。</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>效率提升</h3>
+                        <p>引入时间管理与专注力训练体系，让学习事半功倍，释放更多潜能。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses" class="courses">
+            <div class="container">
+                <div class="section-title">
+                    <h2>核心课程体系</h2>
+                    <p>针对不同阶段与需求的定制化解决方案</p>
+                </div>
+                <div class="course-grid">
+                    <!-- Course 1 -->
+                    <article class="course-card">
+                        <div class="course-img">
+                            <span class="course-badge">热门</span>
+                            <img src="https://picsum.photos/seed/edu1/400/300" alt="青少年专注力训练">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-meta">
+                                <span>时长: 12课时</span>
+                                <span>难度: 中级</span>
+                            </div>
+                            <h3 class="course-title">青少年专注力与深度学习训练</h3>
+                            <p class="course-desc">针对注意力分散问题，通过游戏化训练与科学作息调整，帮助孩子找回学习状态。</p>
+                            <div class="course-footer">
+                                <span class="price">¥299</span>
+                                <a href="#" class="btn-outline">查看详情</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Course 2 -->
+                    <article class="course-card">
+                        <div class="course-img">
+                            <span class="course-badge" style="background-color: var(--primary-color);">新课</span>
+                            <img src="https://picsum.photos/seed/edu2/400/300" alt="亲子沟通艺术">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-meta">
+                                <span>时长: 8课时</span>
+                                <span>难度: 入门</span>
+                            </div>
+                            <h3 class="course-title">亲子沟通艺术与冲突化解</h3>
+                            <p class="course-desc">打破代际隔阂，学习如何倾听与表达，构建和谐的家庭沟通氛围。</p>
+                            <div class="course-footer">
+                                <span class="price">¥199</span>
+                                <a href="#" class="btn-outline">查看详情</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Course 3 -->
+                    <article class="course-card">
+                        <div class="course-img">
+                            <span class="course-badge" style="background-color: #8E44AD;">进阶</span>
+                            <img src="https://picsum.photos/seed/edu3/400/300" alt="成人自我管理">
+                        </div>
+                        <div class="course-content">
+                            <div class="course-meta">
+                                <span>时长: 20课时</span>
+                                <span>难度: 高级</span>
+                            </div>
+                            <h3 class="course-title">成人自我管理与职业规划</h3>
+                            <p class="course-desc">结合心理学与管理学，帮助职场人士平衡工作与生活，实现长期职业目标。</p>
+                            <div class="course-footer">
+                                <span class="price">¥499</span>
+                                <a href="#" class="btn-outline">查看详情</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="resources">
+            <div class="container">
+                <div class="section-title">
+                    <h2>深度阅读与资源</h2>
+                    <p>持续更新的教育理念与实战案例</p>
+                </div>
+                <div class="resource-list">
+                    <!-- Main Content -->
+                    <div class="main-content">
+                        <article class="article-item">
+                            <img src="https://picsum.photos/seed/blog1/200/150" alt="文章缩略图" class="article-thumb">
+                            <div class="article-info">
+                                <span class="article-category">学习心理</span>
+                                <h3 class="article-title">如何利用“番茄工作法”突破拖延症？</h3>
+                                <p class="article-excerpt">拖延症往往源于对任务的恐惧或对时间的错觉。本文将深入剖析拖延背后的心理机制，并提供一套可执行的番茄工作法改良方案。</p>
+                                <span class="article-meta">阅读时间: 5分钟 • 发布于 2023-10-15</span>
+                            </div>
+                        </article>
+
+                        <article class="article-item">
+                            <img src="https://picsum.photos/seed/blog2/200/150" alt="文章缩略图" class="article-thumb">
+                            <div class="article-info">
+                                <span class="article-category">家庭教育</span>
+                                <h3 class="article-title">非暴力沟通在家庭教育中的应用</h3>
+                                <p class="article-excerpt">当孩子顶撞时，您是否容易情绪失控？学习观察、感受、需要和请求四要素，让沟通成为连接心灵的桥梁。</p>
+                                <span class="article-meta">阅读时间: 7分钟 • 发布于 2023-10-12</span>
+                            </div>
+                        </article>
+
+                        <article class="article-item">
+                            <img src="https://picsum.photos/seed/blog3/200/150" alt="文章缩略图" class="article-thumb">
+                            <div class="article-info">
+                                <span class="article-category">个人成长</span>
+                                <h3 class="article-title">深度工作的意义：在这个碎片化时代</h3>
+                                <p class="article-excerpt">在信息过载的今天，保持专注力变得前所未有的困难。深度工作不仅是提升效率的手段，更是创造力的源泉。</p>
+                                <span class="article-meta">阅读时间: 6分钟 • 发布于 2023-10-10</span>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <div class="sidebar-widget">
+                            <h4 class="widget-title">常见问题 (FAQ)</h4>
+                            <ul class="faq-list">
+                                <li>
+                                    <span class="faq-question">课程是否支持回放？</span>
+                                    <span class="faq-answer">是的，所有购买的课程均支持永久回放，方便您反复学习。</span>
+                                </li>
+                                <li>
+                                    <span class="faq-question">零基础可以学习吗？</span>
+                                    <span class="faq-answer">我们的课程从入门到进阶分级设置，零基础学员也可以轻松跟上。</span>
+                                </li>
+                                <li>
+                                    <span class="faq-question">有专门的答疑服务吗？</span>
+                                    <span class="faq-answer">购买后可加入学员群，专业导师会定期进行答疑和指导。</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h4 class="widget-title">热门话题</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <span class="tag">#时间管理</span>
+                                <span class="tag">#自我提升</span>
+                                <span class="tag">#情绪控制</span>
+                                <span class="tag">#亲子关系</span>
+                                <span class="tag">#记忆力训练</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="about">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>秘密教学</h4>
+                    <p style="color: #bdc3c7; font-size: 14px; line-height: 1.8;">
+                        致力于通过科学的教育方法和心理学技巧，帮助个人和家庭实现更高效的学习与更和谐的生活。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">课程目录</a></li>
+                        <li><a href="#">讲师团队</a></li>
+                        <li><a href="#">学员反馈</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助中心</h4>
+                    <ul>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">联系客服</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">服务条款</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>订阅更新</h4>
+                    <p style="color: #bdc3c7; font-size: 13px; margin-bottom: 10px;">获取最新教育资讯与免费课程福利。</p>
+                    <div style="display: flex;">
+                        <input type="email" placeholder="您的邮箱" style="padding: 8px; border: none; border-radius: 4px 0 0 4px; width: 100%;">
+                        <button style="padding: 8px 12px; background: var(--secondary-color); border: none; border-radius: 0 4px 4px 0; cursor: pointer; color: #333; font-weight: bold;">→</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 秘密教学 版权所有. 本网站内容仅供学习参考，不构成专业医疗或心理建议。</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
